@@ -1,4 +1,5 @@
 using Application;
+using Infrastructure;
 using Core.CrossCuttingConcerns.Exceptions.Extensions;
 using MassTransit;
 using Persistence;
@@ -12,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
-
+builder.Services.AddInfrastructureServices();
 //builder.Services.AddDistributedMemoryCache();
 builder.Services.AddStackExchangeRedisCache(opt=> opt.Configuration="localhost:6379");
 
@@ -22,31 +23,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddMassTransit(x =>
-{
-    //x.AddEntityFrameworkOutbox<BaseDbContext>(o =>
-    //{
-    //    o.QueryDelay = TimeSpan.FromSeconds(10);
 
-    //    o.UsePostgres();
-    //    o.UseBusOutbox();
-    //});
-
-    //x.AddConsumersFromNamespaceContaining<AuctionCreatedFaultConsumer>();
-
-    //x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("auction", false));
-
-    x.UsingRabbitMq((context, cfg) =>
-    {
-        cfg.Host(builder.Configuration["RabbitMq:Host"], "/", host =>
-        {
-            host.Username(builder.Configuration.GetValue("RabbitMq:Username", "guest"));
-            host.Password(builder.Configuration.GetValue("RabbitMq:Password", "guest"));
-        });
-
-        cfg.ConfigureEndpoints(context);
-    });
-});
 
 var app = builder.Build();
 
