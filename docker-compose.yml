@@ -1,0 +1,54 @@
+version: "3.4"
+
+services:
+    #brandsAndModelsApi:
+    #    build:
+    #      context: .
+    #      dockerfile: WebApi/Dockerfile
+    #    ports:
+    #      - 7001:80
+    #    depends_on:
+    #      - db
+    #sql:
+    #    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    #    container_name: sql_server2022
+    #    ports: # not actually needed, because the two services are on the same network
+    #        - "1433:1433" 
+    #    environment:
+    #        - ACCEPT_EULA=y
+    #        - SA_PASSWORD=A&VeryComplex123Password
+
+    #mongodb:
+    #    image: mongo
+    #    environment:
+    #      - MONGO_INITDB_ROOT_USERNAME=root
+    #      - MONGO_INITDB_ROOT_PASSWORD=mongopw
+    #    ports:
+    #      - 27017:27017
+    #    volumes:
+    #      - mongodb-data:/var/lib/mongodb/data
+
+    postgres:
+        image: postgres
+        environment:
+          - POSTGRES_PASSWORD=postgrespw
+        ports:
+          - 5432:5432
+        volumes:
+          - psql-data:/var/lib/postresql/data
+    rabbitmq:
+        image: rabbitmq:3-management-alpine
+        ports:
+            - 5672:5672
+            - 15672:15672
+
+    redis:
+        image: redis
+        ports:
+          - "6379:6379"
+        volumes:
+          - redis_data:/data
+
+volumes:
+  redis_data:
+  psql-data:
