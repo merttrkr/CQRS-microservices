@@ -1,10 +1,6 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Infrastructure;
 
@@ -22,8 +18,6 @@ public static class InfrastructureServiceRegistration
             //    o.UsePostgres();
             //    o.UseBusOutbox();
             //});
-
-            //x.AddConsumersFromNamespaceContaining<AuctionCreatedFaultConsumer>();
 
             //x.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("auction", false));
 

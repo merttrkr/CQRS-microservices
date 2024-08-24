@@ -1,7 +1,6 @@
 using Application;
 using Infrastructure;
 using Core.CrossCuttingConcerns.Exceptions.Extensions;
-using MassTransit;
 using Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +13,7 @@ builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddInfrastructureServices();
+
 //builder.Services.AddDistributedMemoryCache();
 builder.Services.AddStackExchangeRedisCache(opt=> opt.Configuration="localhost:6379");
 
@@ -28,7 +28,6 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
 app.UseSwagger();
 app.UseSwaggerUI();
 
