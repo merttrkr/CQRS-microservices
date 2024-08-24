@@ -4,6 +4,6 @@
  * added microservices implementation to CQRS architecture 
  * added RabbitMQ with mass transit for future services. 
  * updated infrastructure modules.
-  ![Visualization of the codebase](./diagram.svg)
+ * ![Visualization of the codebase](./diagram.svg)
  
  
